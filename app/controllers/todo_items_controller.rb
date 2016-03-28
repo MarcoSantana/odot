@@ -4,6 +4,9 @@ class TodoItemsController < ApplicationController
   def index
   end
 
+  def show
+  end
+
   def new
     @todo_item = @todo_list.todo_items.new
   end
@@ -32,6 +35,16 @@ class TodoItemsController < ApplicationController
       flash[:error] = "There was a problem editing that todo list item"
       render action: :edit
     end
+  end
+
+  def destroy
+    @todo_item = @todo_list.todo_items.find(params[:id])
+    if @todo_item.destroy
+      flash[:success] = "Todo list item was deleted"
+    else
+      flash[:error] = "Todo list could not be deleted"
+    end
+    redirect_to todo_list_todo_items_path
   end
 
   def url_options
