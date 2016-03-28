@@ -2,12 +2,14 @@
 
 <ul class="todo_items">
   <% @todo_list.todo_items.each do |todo_item| %>
-    <li>
+    <li id="<%= dom_id(todo_item) %>">
       <%= todo_item.content %>
+      <%= link_to "Edit", edit_todo_list_todo_item_path(todo_item), class: "btn btn-primary" %>
     </li>
   <% end %>
 </ul>
 
 <p>
   <%= link_to "New Todo Item", new_todo_list_todo_item_path %>
+  <%= link_to "Edit", new_todo_list_todo_item_path, class: "btn btn-primary" %>
 </p>
