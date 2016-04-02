@@ -16,6 +16,7 @@
       <tr id="<%= dom_id(todo_list) %>">
         <td><%= todo_list.title %>
           <%= todo_list.description %>
+          <%= link_to "New Todo Item", new_todo_list_todo_items_path(todo_list) %>
           <%= link_to "List Items", todo_list_todo_items_path(todo_list) %>
           <%= link_to 'Show', todo_list %>
           <%= link_to 'Edit', edit_todo_list_path(todo_list) %>
