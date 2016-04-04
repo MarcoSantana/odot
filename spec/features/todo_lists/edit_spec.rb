@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'spec_helper'
 describe 'Editing todo lists' do
   let!(:todo_list) { TodoList.create(title:"Groceries", description:"Grocerie List") }
 
