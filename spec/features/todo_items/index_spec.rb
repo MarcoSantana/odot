@@ -29,7 +29,7 @@ describe "Viewing the items" do
 
     visit_todo_list(todo_list)
 
-    expect(page.all("ul.todo_items li").size).to eq(2)
+    expect(page.all("table.todo_items tr td").size).to eq(2)
 
     within "ul.todo_items" do
       expect(page).to have_content("Milk")
