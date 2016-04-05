@@ -11,7 +11,7 @@ describe "Viewing the items" do
   end
   it 'should display the title of the list' do
     visit_todo_list(todo_list)
-    within("h1") do
+      within(:css, "h1#todo_list_#{todo_list.id}")do
       expect(page).to have_content(todo_list.title)
     end
 
