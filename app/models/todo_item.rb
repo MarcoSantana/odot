@@ -1,5 +1,6 @@
 class TodoItem < ActiveRecord::Base
-  belongs_to :todo_list
+  belongs_to :todo_list, dependent: :destroy
+  has_paper_trail
   validates_presence_of :content
   validates_length_of :content, minimum: 3, maximum: 256
 
