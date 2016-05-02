@@ -7,7 +7,6 @@ describe "Deleting todo items" do
 
   it 'should success' do
     visit_todo_list(todo_list)
-    expect(page).to have_content("Delete")
     within "#todo_item_#{todo_item.id}" do
       click_link "Delete"
     end

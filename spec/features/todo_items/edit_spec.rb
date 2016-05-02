@@ -18,7 +18,7 @@ describe "Editing list items" do
     end
     fill_in "Content", with: "Lots of mik"
     click_button("Save")
-    expect(page).to have_content("Updated todo list item")
+    expect(page).to have_content("Saved todo list item.")
 
     todo_item.reload
 

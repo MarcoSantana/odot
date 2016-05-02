@@ -1,7 +1,6 @@
 class TodoList < ActiveRecord::Base
 
   has_many :todo_items, dependent: :destroy
-  has_paper_trail
 
   validates :title, presence:true, length: { minimum: 3 }
 

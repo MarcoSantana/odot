@@ -1,4 +1,10 @@
-Rails.application.routes.draw do
+Odot::Application.routes.draw do
+  get 'user_sessions/new'
+
+  get 'user_sessions/create'
+
+  resources :users
+  resources :users
 
   resources :todo_lists do
     resources :todo_items do
@@ -7,12 +13,13 @@ Rails.application.routes.draw do
       end
     end
   end
+  root 'todo_lists#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'todo_lists#index'
+  # root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

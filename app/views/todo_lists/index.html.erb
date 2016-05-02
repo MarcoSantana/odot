@@ -1,37 +1,20 @@
-<h1>Todo Lists <small><%= @todo_lists.count %> Lists</small></h1>
+<h1>Todo Lists</h1>
 
 
+<% @todo_lists.each do |todo_list| %>
+<div class="todo_list" id="<%= dom_id(todo_list) %>">
+  <h2><%= todo_list.title %></h2>
+  <p><%= todo_list.description %></p>
+  <ul class="functions">
+    <li><%= link_to "List Items", todo_list_todo_items_path(todo_list) %></li>
+    <li><%= link_to 'Show', todo_list %></li>
+    <li><%= link_to 'Edit', edit_todo_list_path(todo_list) %></li>
+    <li><%= link_to 'Destroy', todo_list, method: :delete, data: { confirm: 'Are you sure?' } %></li>
+  </ul>
+  <br class="clear" />
+</div>
+<% end %>
 
-
-    <% @todo_lists.each do |todo_list| %>
-<<<<<<< HEAD
-      <div class="todo_list" id="<%= dom_id(todo_list) %>">
-        <h2><%= todo_list.title %> <small><%= todo_list.todo_items.count %> <small>Items</small></small></h2>
-          <p>
-            <%= todo_list.description %>
-          </p>
-          <ul class="functions">
-            <li><%= link_to "List Items", todo_list_todo_items_path(todo_list) %></li>
-            <li><%= link_to 'Show', todo_list %></li>
-            <li><%= link_to 'Edit', edit_todo_list_path(todo_list) %></li>
-            <li><%= link_to 'Destroy', todo_list, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-            <li><%= link_to "New Todo Item", new_todo_list_todo_item_path(todo_list) %></li>
-          </ul>
-=======
-      <tr id="<%= dom_id(todo_list) %>">
-        <td><%= todo_list.title %>
-          <%= todo_list.description %>
-          <%= link_to "New Todo Item", new_todo_list_todo_items_path(todo_list) %>
-          <%= link_to "List Items", todo_list_todo_items_path(todo_list) %>
-          <%= link_to 'Show', todo_list %>
-          <%= link_to 'Edit', edit_todo_list_path(todo_list) %>
-          <%= link_to 'Destroy', todo_list, method: :delete, data: { confirm: 'Are you sure?' } %>
->>>>>>> feature/code-cleanup
-        </td>
-        </tr>
-      </div>
-    <% end %>
-
-<br class="clear">
+<br>
 
 <%= link_to 'New Todo list', new_todo_list_path %>

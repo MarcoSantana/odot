@@ -1,8 +1,12 @@
 #Added by Msantana
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
+require 'rails_helper'
 require 'rspec/rails'
 require 'capybara/rspec'
+require "shoulda/matchers"
+require "bundler/setup"
+
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -40,6 +44,8 @@ RSpec.configure do |config|
   #Not working as in video
   config.include TodoListHelpers, type: :feature
   config.include RailsDomIdHelper, type: :feature
+  config.include(Shoulda::Matchers::ActiveRecord, type: :model)
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
