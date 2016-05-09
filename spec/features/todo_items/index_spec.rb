@@ -1,7 +1,8 @@
 require "rails_helper"
 
 describe "Viewing the items" do
-  let!(:todo_list) { TodoList.create( title:"Grocery list", description:"Groceries" ) }
+  let(:user) { create(:user) }
+  let!(:todo_list) { create(:todo_list) }
 
   def visit_todo_list(list)
     visit "/todo_lists"
@@ -9,6 +10,11 @@ describe "Viewing the items" do
       click_link "List Items"
     end
   end
+
+  before do
+    sign_in( todo_list.user, password: "password1234")
+  end
+
   it 'should display the title of the list' do
     visit_todo_list(todo_list)
       within(:css, "h1#todo_list_#{todo_list.id}")do

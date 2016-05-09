@@ -10,8 +10,15 @@ RSpec.describe "Users", type: :request do
       password_confirmation:  "treehouse1234"
     }
    }
+  let(:user) { create(:user) }
   context "validations" do
-    let(:user) { User.new(valid_attributes) }
+
+
+    context "relationships" do
+      # TODO: Fix the error that impedes this test to pass
+      # it { should have_many(:todo_lists)}
+
+    end
 
     before do
       User.create(valid_attributes)
@@ -54,6 +61,20 @@ RSpec.describe "Users", type: :request do
 
     it 'require a last_name' do
       expect(user).to validate_presence_of(:last_name)
+    end
+  end
+
+  describe "#generate_password_reset_token!" do
+    let!(:user) { create(:user ) }
+
+
+    it 'changes the password_reset_attribute' do
+      expect { user.generate_password_reset_token! }.to change{ user.password_reset_token }
+    end
+
+    it 'calss SecureRandom.urlsafe_base64 to generate the password_reset_token' do
+      expect(SecureRandom).to receive(:urlsafe_base64)
+      user.generate_password_reset_token!
     end
   end
 

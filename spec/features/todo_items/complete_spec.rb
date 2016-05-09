@@ -1,9 +1,13 @@
-require 'rails_helper'
 require 'spec_helper'
 
 describe 'Editing todo lists' do
-  let!(:todo_list) { TodoList.create(title:"Groceries", description:"Grocerie List") }
+  let(:user) { create(:user) }
+  let!(:todo_list) { create(:todo_list) }
   let!(:todo_item) { todo_list.todo_items.create(content: "Milk")}
+
+  before do
+    sign_in(todo_list.user, password: "password1234")
+  end
 
   it 'should succes when marking a single item complete' do
     expect(todo_item.completed_at).to be_nil

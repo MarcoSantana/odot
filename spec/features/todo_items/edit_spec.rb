@@ -1,7 +1,8 @@
 require "rails_helper"
 
 describe "Editing list items" do
-  let!(:todo_list) { TodoList.create( title:"Grocery list", description:"Groceries" ) }
+  let(:user) { create(:user) }
+  let!(:todo_list) { create(:todo_list) }
   let!(:todo_item) { todo_list.todo_items.create(content: "Milk")}
 
   def visit_todo_list(list)
@@ -9,6 +10,10 @@ describe "Editing list items" do
     within "#todo_list_#{list.id}" do
       click_link "List Items"
     end
+  end
+
+  before do
+    sign_in(todo_list.user, password: "password1234")
   end
 
   it 'should success with valid content' do

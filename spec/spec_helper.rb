@@ -44,7 +44,9 @@ RSpec.configure do |config|
   #Not working as in video
   config.include TodoListHelpers, type: :feature
   config.include RailsDomIdHelper, type: :feature
-  config.include(Shoulda::Matchers::ActiveRecord, type: :model)
+  config.include FactoryGirl::Syntax::Methods
+  config.include AuthenticationHelpers::Controller, type: :controller
+  config.include AuthenticationHelpers::Feature, type: :feature
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
