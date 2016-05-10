@@ -40,10 +40,10 @@ describe TodoListsController do
   describe "GET index" do
     context "logged in" do
       it "assigns all todo_lists as @todo_lists" do
-        get :index
-        todo_list = user.todo_lists
+        todo_list = user.todo_lists.create! valid_attributes
+        get :index, {}, valid_session
         assigns(:todo_lists).should eq([todo_list])
-        expect(assigns(:todo_lists).map(:user)).to eq([user])
+        expect(assigns(:todo_lists).map(&:user)).to eq([user])
       end
 
       it "does not load other user's todo lists" do
