@@ -20,14 +20,28 @@ RSpec.describe PasswordResetsController, type: :controller do
 
       end
 
-      it 'generates a new password reset token' do
-        expect{ post :create, email: user.email; user.reload }.to change{ user.password_reset_token }
-      end
+      it('generates a new password reset token') { expect { post :create, email: user.email; user.reload }.to change { user.password_reset_token } }
 
       it "should send a password reset email" do
         expect{ post :create, email: user.email }.to change(ActionMailer::Base.deliveries, :size  )
       end
 
+      it "should set the flash message to success" do
+        post :create, email: user.email
+        expect(flash[:success]).to match(/mail sent/)
+      end
+
+    end
+    context "with no user found" do
+      it "should render the new page" do
+      post :create, email: 'none@found.com'
+        expect(response).to render_template(:new)
+      end
+
+      it "should set the flash message" do
+        post :create, email: 'none@found.com'
+        expect(flash[:notice]).to match(/not found/)
+      end
     end
   end
 

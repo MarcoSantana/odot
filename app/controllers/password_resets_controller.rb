@@ -5,8 +5,18 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
+
     user = User.find_by(email: params[:email])
-    user.generate_password_reset_token!
-    redirect_to login_path
+    if user
+      user.generate_password_reset_token!
+      Notifier.password_reset(user).deliver_now
+      flash[:success] = 'Email sent'
+      redirect_to login_path
+    else
+      flash[:notice] = 'Email not found'
+      render action: :new
+    end
+
   end
+
 end
